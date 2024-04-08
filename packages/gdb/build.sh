@@ -16,6 +16,7 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 --disable-werror
 --with-system-readline
 --with-curses
+--with-debuginfod
 --with-guile
 --with-python=$TERMUX_PREFIX/bin/python
 ac_cv_func_getpwent=no
