@@ -8,6 +8,8 @@
 +endif()
 +if(APPLE)
      add_compile_definitions(VK_USE_PLATFORM_METAL_EXT)
+     if (IOS)
+         add_compile_definitions(VK_USE_PLATFORM_IOS_MVK)
 --- a/layers/CMakeLists.txt
 +++ b/layers/CMakeLists.txt
 @@ -350,7 +350,7 @@
