@@ -10,14 +10,3 @@
      add_compile_definitions(VK_USE_PLATFORM_METAL_EXT)
      if (IOS)
          add_compile_definitions(VK_USE_PLATFORM_IOS_MVK)
---- a/layers/CMakeLists.txt
-+++ b/layers/CMakeLists.txt
-@@ -384,7 +384,7 @@
- 
- target_include_directories(vvl SYSTEM PRIVATE external)
- 
--if (ANDROID)
-+if (0 AND ANDROID)
-     # https://gitlab.kitware.com/cmake/cmake/issues/18787
-     # https://github.com/android-ndk/ndk/issues/463
-     # "Users should be able to reliably use the toolchain provided by the NDK r23 or later when using CMake 3.21 or later" - Professional CMake
