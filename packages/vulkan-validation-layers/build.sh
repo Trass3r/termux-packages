@@ -3,6 +3,7 @@ TERMUX_PKG_DESCRIPTION="Vulkan Validation Layers"
 TERMUX_PKG_LICENSE="Apache-2.0"
 TERMUX_PKG_MAINTAINER="@termux"
 TERMUX_PKG_VERSION="1.3.281"
+TERMUX_PKG_API_LEVEL=28
 TERMUX_PKG_SRCURL=https://github.com/KhronosGroup/Vulkan-ValidationLayers/archive/refs/tags/v${TERMUX_PKG_VERSION}.tar.gz
 TERMUX_PKG_SHA256=7b13853d81ac106dceeb8768f010fade7b94ee2283ee09e356a74a27ca468da5
 TERMUX_PKG_DEPENDS="libc++, vulkan-loader"
