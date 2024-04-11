@@ -12,11 +12,12 @@
          add_compile_definitions(VK_USE_PLATFORM_IOS_MVK)
 --- a/layers/CMakeLists.txt
 +++ b/layers/CMakeLists.txt
-@@ -384,7 +384,7 @@
+@@ -384,7 +384,8 @@
  
  target_include_directories(vvl SYSTEM PRIVATE external)
  
 -if (ANDROID)
++target_link_libraries(VkLayer_utils PUBLIC nativewindow)
 +if (0 AND ANDROID)
      # https://gitlab.kitware.com/cmake/cmake/issues/18787
      # https://github.com/android-ndk/ndk/issues/463
