@@ -12,15 +12,6 @@
          add_compile_definitions(VK_USE_PLATFORM_IOS_MVK)
 --- a/layers/CMakeLists.txt
 +++ b/layers/CMakeLists.txt
-@@ -350,7 +350,7 @@
- endif()
-     # Both Apple and IOS
-     target_link_options(vvl PRIVATE -exported_symbols_list ${CMAKE_CURRENT_SOURCE_DIR}/${LAYER_NAME}.exp)
--elseif(ANDROID)
-+elseif(0 AND ANDROID)
-     target_link_options(vvl PRIVATE LINKER:--version-script=${CMAKE_CURRENT_SOURCE_DIR}/${LAYER_NAME}-android.map)
- else()
-     target_link_options(vvl PRIVATE LINKER:--version-script=${CMAKE_CURRENT_SOURCE_DIR}/${LAYER_NAME}.map)
 @@ -384,7 +384,7 @@
  
  target_include_directories(vvl SYSTEM PRIVATE external)
