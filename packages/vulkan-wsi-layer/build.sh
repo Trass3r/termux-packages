@@ -26,7 +26,7 @@ termux_step_post_get_source() {
 	fi
 
 	local s=$(find . -type f ! -path '*/.git/*' -print0 | xargs -0 sha256sum | LC_ALL=C sort | sha256sum)
-    echo "$s"
+	echo "$s"
 	if [[ "${s}" != "${TERMUX_PKG_SHA256}  "* ]]; then
 		termux_error_exit "Checksum mismatch for source files."
 	fi
