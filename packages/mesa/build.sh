@@ -30,7 +30,8 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 -Dllvm=enabled
 -Dshared-llvm=enabled
 -Dplatforms=x11,wayland
--Dgallium-drivers=swrast,virgl,zink
+-Dgallium-drivers=swrast,virgl,zink,panfrost
+-Dvulkan-drivers=swrast,panfrost
 -Dosmesa=true
 -Dglvnd=enabled
 -Dxmlconfig=disabled
@@ -58,15 +59,6 @@ termux_step_pre_configure() {
 		export LLVM_CONFIG="$TERMUX_PREFIX/bin/llvm-config"
 	fi
 	export PATH="$_WRAPPER_BIN:$PATH"
-
-	if [ $TERMUX_ARCH = "arm" ] || [ $TERMUX_ARCH = "aarch64" ]; then
-		TERMUX_PKG_EXTRA_CONFIGURE_ARGS+=" -Dvulkan-drivers=swrast,freedreno"
-		TERMUX_PKG_EXTRA_CONFIGURE_ARGS+=" -Dfreedreno-kmds=msm,kgsl"
-	elif [ $TERMUX_ARCH = "i686" ] || [ $TERMUX_ARCH = "x86_64" ]; then
-		TERMUX_PKG_EXTRA_CONFIGURE_ARGS+=" -Dvulkan-drivers=swrast"
-	else
-		termux_error_exit "Invalid arch: $TERMUX_ARCH"
-	fi
 }
 
 termux_step_post_configure() {
