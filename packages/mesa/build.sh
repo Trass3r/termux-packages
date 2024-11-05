@@ -19,7 +19,7 @@ TERMUX_DEBUG_BUILD=true
 # FIXME: Set `shared-llvm` to disabled if possible
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 --cmake-prefix-path $TERMUX_PREFIX
--Doptimization=2
+-Doptimization=g
 -Dcpp_rtti=false
 -Dgbm=enabled
 -Dopengl=true
