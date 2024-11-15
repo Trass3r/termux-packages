@@ -1,0 +1,38 @@
+diff --git a/src/vulkan/wsi/wsi_common.c b/src/vulkan/wsi/wsi_common.c
+index 77755e96b93..7b1ac4c4a5a 100644
+--- a/src/vulkan/wsi/wsi_common.c
++++ b/src/vulkan/wsi/wsi_common.c
+@@ -60,6 +60,7 @@ static const struct debug_control debug_control[] = {
+    { "linear",       WSI_DEBUG_LINEAR },
+    { "dxgi",         WSI_DEBUG_DXGI },
+    { "blit",         WSI_DEBUG_BLIT },
++   { "nosync",       WSI_DEBUG_NOSYNC },
+    { NULL, },
+ };
+ 
+diff --git a/src/vulkan/wsi/wsi_common_private.h b/src/vulkan/wsi/wsi_common_private.h
+index c205c4f62c3..a080274712a 100644
+--- a/src/vulkan/wsi/wsi_common_private.h
++++ b/src/vulkan/wsi/wsi_common_private.h
+@@ -41,6 +41,7 @@ struct wsi_swapchain;
+ #define WSI_DEBUG_LINEAR      (1ull << 3)
+ #define WSI_DEBUG_DXGI        (1ull << 4)
+ #define WSI_DEBUG_BLIT        (1ull << 8)
++#define WSI_DEBUG_NOSYNC      (1ull << 9)
+ 
+ extern uint64_t WSI_DEBUG;
+ 
+diff --git a/src/vulkan/wsi/wsi_common_x11.c b/src/vulkan/wsi/wsi_common_x11.c
+index 7911e54eae6..7e59f70f50a 100644
+--- a/src/vulkan/wsi/wsi_common_x11.c
++++ b/src/vulkan/wsi/wsi_common_x11.c
+@@ -1622,6 +1622,9 @@ x11_needs_wait_for_fences(const struct wsi_device *wsi_device,
+       return false;
+    }
+ 
++   if (WSI_DEBUG & WSI_DEBUG_NOSYNC)
++      return false;
++
+    switch (present_mode) {
+       case VK_PRESENT_MODE_MAILBOX_KHR:
+          return true;
