@@ -145,9 +145,13 @@ PACKAGES+=" composer"
 
 # Needed by package rust.
 PACKAGES+=" libssl-dev" # Needed to build Rust
-PACKAGES+=" llvm-17-dev"
-PACKAGES+=" llvm-17-tools"
-PACKAGES+=" clang-17"
+PACKAGES+=" llvm-18-dev"
+PACKAGES+=" llvm-18-tools"
+PACKAGES+=" clang-18"
+
+# Needed by librusty-v8
+PACKAGES+=" libclang-rt-17-dev"
+PACKAGES+=" libclang-rt-17-dev:i386"
 
 # Needed for package smalltalk.
 PACKAGES+=" libsigsegv-dev"
@@ -263,9 +267,6 @@ PACKAGES+=" libxft-dev"
 PACKAGES+=" libxt-dev"
 PACKAGES+=" xbitmaps"
 
-# Needed by proxmark3/proxmark3-git
-PACKAGES+=" gcc-arm-none-eabi"
-
 # Needed by pypy
 PACKAGES+=" qemu-user-static"
 
@@ -308,6 +309,9 @@ PACKAGES+=" swig"
 # Needed by binutils-cross
 PACKAGES+=" libzstd-dev"
 
+# Needed by tree-sitter-c
+PACKAGES+=" tree-sitter-cli"
+
 # Do not require sudo if already running as root.
 SUDO="sudo"
 if [ "$(id -u)" = "0" ]; then
@@ -321,11 +325,8 @@ $SUDO dpkg --add-architecture i386
 $SUDO cp $(dirname "$(realpath "$0")")/llvm-snapshot.gpg.key /etc/apt/trusted.gpg.d/apt.llvm.org.asc
 $SUDO chmod a+r /etc/apt/trusted.gpg.d/apt.llvm.org.asc
 {
-	echo "deb [arch=amd64] http://apt.llvm.org/noble/ llvm-toolchain-noble-17 main"
+	echo "deb [arch=amd64] http://apt.llvm.org/noble/ llvm-toolchain-noble-18 main"
 } | $SUDO tee /etc/apt/sources.list.d/apt-llvm-org.list > /dev/null
-
-# Add deadsnakes PPA to enable installing python 3.11:
-$SUDO add-apt-repository -y 'ppa:deadsnakes/ppa'
 
 $SUDO apt-get -yq update
 
