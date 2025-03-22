@@ -11,9 +11,11 @@ _COMMIT=e65c7eb6ee2f9903c3256f2677beb1d98464103f
 TERMUX_PKG_DEPENDS="libandroid-shmem, libc++, libdrm, libx11, libxcb, libxshmfence, libwayland, vulkan-loader-generic, zlib, zstd"
 TERMUX_PKG_BUILD_DEPENDS="libwayland-protocols, libxrandr, xorgproto"
 TERMUX_PKG_API_LEVEL=26
+TERMUX_DEBUG_BUILD=true
 
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 --cmake-prefix-path $TERMUX_PREFIX
+-Doptimization=g
 -Dcpp_rtti=false
 -Dgbm=disabled
 -Dopengl=false
@@ -23,7 +25,6 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 -Dgallium-drivers=
 -Dxmlconfig=disabled
 -Dvulkan-drivers=wrapper
--Db_ndebug=true
 "
 
 termux_step_post_get_source() {
