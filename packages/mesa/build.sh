@@ -15,7 +15,7 @@ TERMUX_PKG_SUGGESTS="mesa-dev"
 TERMUX_PKG_BUILD_DEPENDS="libwayland-protocols, libxrandr, llvm, llvm-tools, mlir, xorgproto"
 TERMUX_PKG_CONFLICTS="libmesa, ndk-sysroot (<= 25b)"
 TERMUX_PKG_REPLACES="libmesa"
-TERMUX_PKG_API_LEVEL=28
+TERMUX_PKG_API_LEVEL=29
 TERMUX_DEBUG_BUILD=true
 
 # FIXME: Set `shared-llvm` to disabled if possible
