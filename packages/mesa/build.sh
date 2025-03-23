@@ -22,6 +22,9 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 -Dcpp_rtti=false
 -Db_lto=true
 -Db_lto_mode=thin
+-Dcpp_args='-ffunction-sections -fdata-sections -g1'
+-Dcpp_link_args='-Wl,--gc-sections'
+-Dstrip=false
 -Dgbm=enabled
 -Dopengl=true
 -Degl=enabled
@@ -38,6 +41,10 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 -Dglvnd=enabled
 -Dxmlconfig=disabled
 "
+
+termux_step_make() {
+	ninja -v
+}
 
 termux_step_post_get_source() {
 	# Do not use meson wrap projects
