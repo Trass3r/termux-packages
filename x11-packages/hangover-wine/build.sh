@@ -107,6 +107,16 @@ termux_step_host_build() {
 	make -j "$TERMUX_PKG_MAKE_PROCESSES" __tooldeps__ nls/all
 }
 
+termux_step_configure_autotools_failure_hook() {
+	if [ -f "$TERMUX_PKG_BUILDDIR/config.log" ]; then
+		cat "$TERMUX_PKG_BUILDDIR/config.log"
+	else
+		echo "config.log not found in $TERMUX_PKG_BUILDDIR"
+		find "$TERMUX_PKG_BUILDDIR" -name "config.log" -exec cat {} \;
+	fi
+	return 1  # Still return failure to abort the build
+}
+
 termux_step_pre_configure() {
 	# Setup llvm-mingw toolchain
 	_setup_llvm_mingw_toolchain
