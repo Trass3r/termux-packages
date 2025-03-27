@@ -124,7 +124,8 @@ termux_step_pre_configure() {
 	CFLAGS="${CFLAGS/-Oz/}"
 	CXXFLAGS="${CXXFLAGS/-Oz/}"
 
-	export CROSSCFLAGS="-g1 -O2"
+	export CROSSCFLAGS="-fdata-sections -g1 -O2"
+	export CROSSLDFLAGS+="-Wl,-OPT:REF,-OPT:ICF"
 
 	# Disable hardening
 	CPPFLAGS="${CPPFLAGS/-fstack-protector-strong/}"
