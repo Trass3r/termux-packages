@@ -36,6 +36,7 @@ jobs:
     - name: Clone repository
       uses: actions/checkout@v4
       with:
+        show-progress: false
         fetch-depth: 1000
     - name: Set process id limit for 32-bit builds depending on aosp-libs
       run: echo 65535 | sudo tee /proc/sys/kernel/pid_max
@@ -221,6 +222,7 @@ jobs:
           ./scripts/free-space.sh
         fi
 
+    - uses: Trass3r/setup-cpp@master
     - name: Build packages
       env:
         DOCKER_BUILD: ${{ steps.build-info.outputs.docker-build }}
