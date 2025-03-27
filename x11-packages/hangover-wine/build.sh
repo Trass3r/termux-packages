@@ -82,11 +82,11 @@ enable_tools=yes
 
 _setup_llvm_mingw_toolchain() {
 	# LLVM-mingw's version number must not be the same as the NDK's.
-	local _llvm_mingw_version=19
-	local _version="20240929"
-	local _url="https://github.com/bylaws/llvm-mingw/releases/download/$_version/llvm-mingw-$_version-ucrt-ubuntu-20.04-x86_64.tar.xz"
+	local _llvm_mingw_version=20
+	local _version="20250319"
+	local _url="https://github.com/mstorsjo/llvm-mingw/releases/download/$_version/llvm-mingw-$_version-ucrt-ubuntu-20.04-x86_64.tar.xz"
 	local _path="$TERMUX_PKG_CACHEDIR/$(basename $_url)"
-	local _sha256sum=ce75ad076c87663fd4a77513e947252d97ce799a11926c1f3ac7afed1d6ab85c
+	local _sha256sum=ab2a1489416fa82b3e85e88cb877053ee8a591993408caf076737d8de5ae72ca
 	termux_download $_url $_path $_sha256sum
 	local _extract_path="$TERMUX_PKG_CACHEDIR/llvm-mingw-toolchain-$_llvm_mingw_version"
 	if [ ! -d "$_extract_path" ]; then
