@@ -101,7 +101,6 @@ _setup_llvm_mingw_toolchain() {
 termux_step_host_build() {
 	# Setup llvm-mingw toolchain
 	_setup_llvm_mingw_toolchain
-
 	# Make host wine-tools
 	"$TERMUX_PKG_SRCDIR/configure" ${TERMUX_PKG_EXTRA_HOSTBUILD_CONFIGURE_ARGS}
 	make -j "$TERMUX_PKG_MAKE_PROCESSES" __tooldeps__ nls/all
@@ -120,11 +119,12 @@ termux_step_configure_autotools_failure_hook() {
 termux_step_pre_configure() {
 	# Setup llvm-mingw toolchain
 	_setup_llvm_mingw_toolchain
-
 	# Fix overoptimization
 	CPPFLAGS="${CPPFLAGS/-Oz/}"
 	CFLAGS="${CFLAGS/-Oz/}"
 	CXXFLAGS="${CXXFLAGS/-Oz/}"
+
+	export CROSSCFLAGS="-g1 -O2"
 
 	# Disable hardening
 	CPPFLAGS="${CPPFLAGS/-fstack-protector-strong/}"
