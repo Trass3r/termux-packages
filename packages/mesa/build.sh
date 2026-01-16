@@ -3,12 +3,12 @@ TERMUX_PKG_DESCRIPTION="An open-source implementation of the OpenGL specificatio
 TERMUX_PKG_LICENSE="MIT"
 TERMUX_PKG_LICENSE_FILE="docs/license.rst"
 TERMUX_PKG_MAINTAINER="@termux"
-TERMUX_PKG_VERSION="25.3.0"
-TERMUX_PKG_REVISION=1
+TERMUX_PKG_VERSION="25.1.5"
+TERMUX_PKG_REVISION=2
 _LLVM_MAJOR_VERSION=$(. $TERMUX_SCRIPTDIR/packages/libllvm/build.sh; echo "${LLVM_MAJOR_VERSION}")
 _LLVM_MAJOR_VERSION_NEXT=$((_LLVM_MAJOR_VERSION + 1))
 TERMUX_PKG_SRCURL=https://archive.mesa3d.org/mesa-${TERMUX_PKG_VERSION}.tar.xz
-TERMUX_PKG_SHA256=0fd54fea7dbbddb154df05ac752b18621f26d97e27863db3be951417c6abe8ae
+TERMUX_PKG_SHA256=3c4f6b10ff6ee950d0ec6ea733cc6e6d34c569454e3d39a9b276de9115a3b363
 TERMUX_PKG_AUTO_UPDATE=true
 TERMUX_PKG_DEPENDS="libandroid-shmem, libc++, libdrm, libglvnd, libllvm (<< ${_LLVM_MAJOR_VERSION_NEXT}), libwayland, libx11, libxext, libxfixes, libxshmfence, libxxf86vm, ncurses, vulkan-loader, zlib, zstd"
 TERMUX_PKG_SUGGESTS="mesa-dev"
@@ -20,6 +20,7 @@ TERMUX_PKG_REPLACES="libmesa, osmesa"
 # FIXME: Set `shared-llvm` to disabled if possible
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 --cmake-prefix-path $TERMUX_PREFIX
+-Dcpp_rtti=false
 -Dgbm=enabled
 -Dopengl=true
 -Degl=enabled
@@ -37,7 +38,7 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 "
 
 termux_pkg_auto_update() {
-	read -r latest < <(curl -fsSL "https://archive.mesa3d.org/" | grep -v rc | sed -rn 's/.*mesa-([0-9]+(\.[0-9]+)*).*/\1/p' | sort -Vr);
+	read -r latest < <(curl -fsSL "https://archive.mesa3d.org/" | sed -rn 's/.*mesa-([0-9]+(\.[0-9]+)*).*/\1/p' | sort -Vr);
 	termux_pkg_upgrade_version "${latest}"
 }
 
