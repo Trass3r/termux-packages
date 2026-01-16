@@ -1,5 +1,5 @@
 #!/bin/sh
-set -e -u
+set -eux
 
 TERMUX_SCRIPTDIR=$(cd "$(realpath "$(dirname "$0")")"; cd ..; pwd)
 
