@@ -238,7 +238,13 @@ jobs:
         rm -f ${HOME}/lib/ndk-*.zip ${HOME}/lib/sdk-*.zip
         sudo apt install ninja-build
         ./scripts/free-space.sh
-
+    - uses: easimon/maximize-build-space@master
+      with:
+        root-reserve-mb: 2048
+        remove-dotnet: true
+        remove-android: true
+        remove-haskell: true
+        remove-docker-images: true
     - uses: Trass3r/setup-cpp@master
     - name: Build packages
       if: ${{ steps.build-info.outputs.skip-building != 'true' }}
