@@ -20,7 +20,6 @@ TERMUX_PKG_REPLACES="libmesa, osmesa"
 # FIXME: Set `shared-llvm` to disabled if possible
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 --cmake-prefix-path $TERMUX_PREFIX
--Dcpp_rtti=false
 -Db_lto=true
 -Db_lto_mode=thin
 -Dgbm=enabled
