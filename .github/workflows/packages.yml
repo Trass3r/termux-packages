@@ -239,20 +239,6 @@ jobs:
         sudo apt install ninja-build
         ./scripts/free-space.sh
 
-    - name: free up ~20GB on the runner
-      run: |
-        set -ux
-        df -h
-        time sudo apt autoremove -qq firefox* snap* powershell* gcc-12 gfortran*
-        time sudo apt autoremove -qq php* ruby*
-        time sudo apt autoremove -qq temurin* *-jre* '*llvm*' moby*
-        #time sudo apt autoremove -qq dotnet* microsoft* *sql* mono*
-        time sudo apt autoremove -qq azure* # google*
-        dpkg-query -Wf '${db:Status-Status} ${Installed-Size}\t${Package}\n' | sed -ne 's/^installed //p' | sort -n
-        df -h
-        time sudo rm -rf /usr/local/lib/android
-        time docker system prune -a -f --volumes
-        df -h
     - uses: AdityaGarg8/remove-unwanted-software@v5
       with:
         remove-dotnet: true
@@ -263,7 +249,7 @@ jobs:
         remove-large-packages: true
         remove-cached-tools: true
         remove-swapfile: false
-        verbose: true
+        verbose: false
     - uses: Trass3r/setup-cpp@master
     - name: Build packages
       if: ${{ steps.build-info.outputs.skip-building != 'true' }}
