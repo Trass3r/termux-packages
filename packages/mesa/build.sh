@@ -56,7 +56,7 @@ termux_step_pre_configure() {
 	fi
 
 	termux_setup_cmake
-	#termux_setup_rust
+	termux_setup_rust
 
 	: "${CARGO_HOME:=${HOME}/.cargo}"
 	export CARGO_HOME
