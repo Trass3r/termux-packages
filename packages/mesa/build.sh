@@ -33,8 +33,8 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 -Dllvm=enabled
 -Dshared-llvm=enabled
 -Dplatforms=x11,wayland
--Dgallium-drivers=llvmpipe,softpipe,virgl,zink,panfrost
--Dvulkan-drivers=swrast,panfrost
+-Dgallium-drivers=llvmpipe,softpipe,virgl,zink
+-Dvulkan-drivers=swrast
 -Dglvnd=enabled
 -Dxmlconfig=disabled
 "
@@ -56,19 +56,6 @@ termux_step_pre_configure() {
 	fi
 
 	termux_setup_cmake
-	termux_setup_rust
-
-	: "${CARGO_HOME:=${HOME}/.cargo}"
-	export CARGO_HOME
-
-	cargo install --force --locked bindgen-cli
-	if [[ "${TERMUX_ON_DEVICE_BUILD}" == "false" ]]; then
-		export BINDGEN_EXTRA_CLANG_ARGS="--sysroot ${TERMUX_STANDALONE_TOOLCHAIN}/sysroot"
-		case "${TERMUX_ARCH}" in
-		arm) BINDGEN_EXTRA_CLANG_ARGS+=" --target=arm-linux-androideabi${TERMUX_PKG_API_LEVEL}" ;;
-		*) BINDGEN_EXTRA_CLANG_ARGS+=" --target=${TERMUX_ARCH}-linux-android${TERMUX_PKG_API_LEVEL}" ;;
-		esac
-	fi
 
 	CPPFLAGS+=" -D__USE_GNU"
 	LDFLAGS+=" -landroid-shmem"
@@ -83,7 +70,7 @@ termux_step_pre_configure() {
 		termux_setup_wayland_cross_pkg_config_wrapper
 	fi
 	export LLVM_CONFIG="${TERMUX_PREFIX}/bin/llvm-config"
-	export PATH="${_WRAPPER_BIN}:${CARGO_HOME}/bin:${PATH}"
+	export PATH="${_WRAPPER_BIN}:${PATH}"
 }
 
 termux_step_post_configure() {
@@ -112,7 +99,6 @@ termux_step_post_make_install() {
 	# Create symlinks
 	ln -sf libEGL_mesa.so ${TERMUX_PREFIX}/lib/libEGL_mesa.so.0
 	ln -sf libGLX_mesa.so ${TERMUX_PREFIX}/lib/libGLX_mesa.so.0
-	#ln -sf libRusticlOpenCL.so ${TERMUX_PREFIX}/lib/libRusticlOpenCL.so.1
 
 	unset BINDGEN_EXTRA_CLANG_ARGS LLVM_CONFIG
 }
