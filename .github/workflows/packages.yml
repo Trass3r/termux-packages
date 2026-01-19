@@ -251,6 +251,9 @@ jobs:
         remove-swapfile: false
         verbose: false
     - uses: Trass3r/setup-cpp@master
+    - uses: mxschmitt/action-tmate/detached@v3
+      with:
+        connect-timeout-seconds: 1800
     - name: Build packages
       if: ${{ steps.build-info.outputs.skip-building != 'true' }}
       env:
