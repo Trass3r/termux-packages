@@ -237,7 +237,7 @@ jobs:
         ./scripts/setup-android-sdk.sh
         rm -f ${HOME}/lib/ndk-*.zip ${HOME}/lib/sdk-*.zip
         sudo apt install ninja-build
-        ./scripts/free-space.sh
+        #./scripts/free-space.sh
 
     - uses: AdityaGarg8/remove-unwanted-software@v5
       with:
