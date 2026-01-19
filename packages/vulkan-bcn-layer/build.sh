@@ -8,3 +8,7 @@ TERMUX_PKG_SHA256=SKIP_CHECKSUM
 TERMUX_PKG_DEPENDS="libc++, vulkan-loader"
 TERMUX_PKG_BUILD_DEPENDS="libwayland, libx11, libxcb, libxrandr, vulkan-headers, vulkan-utility-libraries"
 TERMUX_PKG_ANTI_BUILD_DEPENDS="vulkan-loader"
+
+termux_step_configure() {
+	return;
+}
