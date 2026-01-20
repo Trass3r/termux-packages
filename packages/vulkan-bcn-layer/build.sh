@@ -12,5 +12,6 @@ TERMUX_PKG_BUILD_DEPENDS="libxcb, libxrandr, vulkan-headers, vulkan-utility-libr
 TERMUX_PKG_ANTI_BUILD_DEPENDS="vulkan-loader"
 
 termux_step_configure() {
+    sudo apt install -y glslc
 	return;
 }
