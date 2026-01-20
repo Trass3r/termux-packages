@@ -16,12 +16,15 @@ TERMUX_PKG_BUILD_DEPENDS="libclc, libwayland-protocols, libxrandr, llvm, llvm-to
 TERMUX_PKG_BREAKS="osmesa, osmesa-demos"
 TERMUX_PKG_CONFLICTS="libmesa, ndk-sysroot (<= 25b), osmesa"
 TERMUX_PKG_REPLACES="libmesa, osmesa"
+TERMUX_PKG_API_LEVEL=30
+TERMUX_DEBUG_BUILD=true
 
 # FIXME: Set `shared-llvm` to disabled if possible
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 --cmake-prefix-path $TERMUX_PREFIX
 -Db_lto=true
 -Db_lto_mode=thin
+-Doptimization=2
 -Dgbm=enabled
 -Dopengl=true
 -Degl=enabled
